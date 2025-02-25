@@ -1,21 +1,29 @@
+"""
+This application provides functionality for converting audio files using the librosa library.
+It includes functions for loading audio files, displaying waveforms,
+and other audio processing tasks.
+"""
+
+import tkinter as tk
+from tkinter import filedialog, ttk
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
-import tkinter as tk
-from tkinter import filedialog, ttk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
+
 def audio_to_spectrogram(file_path, colormap):
+    """Convertit un fichier audio en spectrogramme."""
     # Charger le fichier audio
     y, sr = librosa.load(file_path)
 
     # Calculer le spectrogramme
-    D = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
+    d = librosa.amplitude_to_db(np.abs(librosa.stft(y)), ref=np.max)
 
     # Afficher le spectrogramme
     plt.figure(figsize=(10, 6))
-    librosa.display.specshow(D, sr=sr, x_axis='time', y_axis='log', cmap=colormap)
+    librosa.display.specshow(d, sr=sr, x_axis='time', y_axis='log', cmap=colormap)
     plt.colorbar(format='%+2.0f dB')
     plt.title('Spectrogramme')
     plt.tight_layout()
@@ -23,6 +31,7 @@ def audio_to_spectrogram(file_path, colormap):
     return plt.gcf()
 
 def load_audio_file():
+    """Charge un fichier audio et met à jour le spectrogramme."""
     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.wav *.mp3 *.flac")])
     if file_path:
         global current_file_path
@@ -31,6 +40,7 @@ def load_audio_file():
         update_spectrogram()
 
 def update_spectrogram():
+    """Met à jour le spectrogramme avec les paramètres actuels."""
     if 'current_file_path' in globals():
         colormap = colormap_var.get()
         fig = audio_to_spectrogram(current_file_path, colormap)
@@ -38,11 +48,14 @@ def update_spectrogram():
         canvas.draw()
 
 def save_spectrogram():
-    file_path = filedialog.asksaveasfilename(defaultextension=".png", filetypes=[("PNG files", "*.png")])
+    """Enregistre le spectrogramme dans un fichier PNG."""
+    file_path = filedialog.asksaveasfilename(defaultextension=".png",
+                                             filetypes=[("PNG files", "*.png")])
     if file_path:
         canvas.figure.savefig(file_path)
 
 def on_closing():
+    """Fonction appelée lorsque la fenêtre est fermée."""
     root.quit()
     root.destroy()
 
