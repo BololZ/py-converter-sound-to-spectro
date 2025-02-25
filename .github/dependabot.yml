@@ -10,5 +10,11 @@ updates:
     schedule:
       interval: "weekly"
       day: "friday"
-    labels:
-      - "pip dependencies"
+    groups:
+      support-dependencies:
+        applies-to: version-updates
+        dependency-type: production
+      security-dependencies:
+        applies-to: security-updates
+        dependency-type: production
+      
