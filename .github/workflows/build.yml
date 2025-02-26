@@ -40,7 +40,7 @@ jobs:
       with:
         name: ${{ runner.os }} Build
         path: |
-          build/**/*.exe
-          build/**/*.bin
+          build/*.dist/*.exe
+          build/*.dist/*.bin
         #  build/*.app/**/*
         include-hidden-files: false
