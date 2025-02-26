@@ -43,7 +43,7 @@ def load_audio_file():
 
 def update_spectrogram():
     """Met à jour le spectrogramme avec les paramètres actuels."""
-    if 'current_file_path' in globals():
+    if '_current_file_path' in globals():
         colormap = colormap_var.get()
         fig = audio_to_spectrogram(_current_file_path, colormap)
         canvas.figure = fig
