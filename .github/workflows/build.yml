@@ -3,43 +3,45 @@ name: Build Tkinter App with Nuitka
 on:
   push:
     tags:
-      - '*'
+      - 'v*'
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         python-version: [3.12]
 
-        steps:
-        - name: Check-out repository
-          uses: actions/checkout@v4
-      
-            # Setup Python
-        - name: Set up Python
-          uses: actions/setup-python@v5
-          with:
-            python-version: '3.12' # Version range or exact version of a Python version to use, using SemVer's version range syntax
-            architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
-      
-            # Build python script into a single execute or app folder (macOS)
-        - name: Python GUI With TkInter
-          uses: Nuitka/Nuitka-Action@main
-          with:
-            nuitka-version: main
-            script-name: converter.py
-            mode: standalone
-            enable-plugins: tk-inter
-      
-            # Uploads artifact
-        - name: Upload Artifacts
-          uses: actions/upload-artifact@v4 
-          with:
-            name: ${{ runner.os }} Build
-            path: |
-              build/*.exe
-              build/*.bin
-              build/*.app/**/*
-            include-hidden-files: false
+    steps:
+    - uses: actions/checkout@v4
+      name: Check-out repository
+        # Setup Python
+    - uses: actions/setup-python@v5
+      name: Set up Python
+      with:
+        python-version: '3.12' # Version range or exact version of a Python version to use, using SemVer's version range syntax
+        architecture: 'x64' # optional x64 or x86. Defaults to x64 if not specified
+        cache: 'pip' # caching pip dependencies
+        cache-dependency-path: '**/requirements*.txt' # optional, default is empty
+        
+        # Build python script into a single execute or app folder (macOS)
+    - uses: Nuitka/Nuitka-Action@main
+      name: Python GUI With TkInter
+      with:
+        nuitka-version: main
+        script-name: converter.py
+        mode: standalone
+        enable-plugins: tk-inter
+  
+        # Uploads artifact
+    - uses: actions/upload-artifact@v4
+      name: Upload Artifacts
+      with:
+        name: ${{ runner.os }} Build
+        path: |
+          build/*.exe
+          build/*.bin
+        #  build/*.app/**/*
+        include-hidden-files: false
