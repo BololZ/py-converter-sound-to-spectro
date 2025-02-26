@@ -3,8 +3,12 @@ name: Pylint
 on:
   push:
     branches: [ main ]
+    paths:
+      - '**.py'
   pull_request:
     branches: [ main ]
+    paths:
+      - '**.py'
 
 permissions:
   contents: read # access to check out code and install dependencies
