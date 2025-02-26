@@ -13,6 +13,8 @@ import numpy as np
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
+_current_file_path = ""
+
 def audio_to_spectrogram(file_path, colormap):
     """Convertit un fichier audio en spectrogramme."""
     # Charger le fichier audio
@@ -34,8 +36,8 @@ def load_audio_file():
     """Charge un fichier audio et met à jour le spectrogramme."""
     file_path = filedialog.askopenfilename(filetypes=[("Audio Files", "*.wav *.mp3 *.flac")])
     if file_path:
-        global current_file_path
-        current_file_path = file_path
+        global _current_file_path
+        _current_file_path = file_path
         file_name_label.config(text=f"Fichier chargé: {file_path.split('/')[-1]}")
         update_spectrogram()
 
@@ -43,7 +45,7 @@ def update_spectrogram():
     """Met à jour le spectrogramme avec les paramètres actuels."""
     if 'current_file_path' in globals():
         colormap = colormap_var.get()
-        fig = audio_to_spectrogram(current_file_path, colormap)
+        fig = audio_to_spectrogram(_current_file_path, colormap)
         canvas.figure = fig
         canvas.draw()
 
