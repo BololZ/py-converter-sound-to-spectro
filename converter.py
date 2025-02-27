@@ -92,4 +92,5 @@ fig, ax = plt.subplots(figsize=(10, 6))
 canvas = FigureCanvasTkAgg(fig, master=main_frame)
 canvas.get_tk_widget().grid(row=5, column=0, pady=10)
 
-root.mainloop()
+if __name__ == "__main__":
+    root.mainloop()
