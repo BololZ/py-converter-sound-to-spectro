@@ -31,7 +31,7 @@ jobs:
       with:
         nuitka-version: main
         script-name: converter.py
-        mode: standalone
+        mode: app
         enable-plugins: tk-inter
   
         # Uploads artifact
@@ -40,7 +40,7 @@ jobs:
       with:
         name: ${{ runner.os }} Build
         path: |
-          build/*.dist/*.exe
-          build/*.dist/*.bin
+          build/converter.dist/converter.exe
+          build/converter.dist/converter.bin
         #  build/*.app/**/*
         include-hidden-files: false
