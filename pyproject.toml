@@ -1,0 +1,20 @@
+[project]
+name = "py-converter-s-to-s"
+version = "0.4.0-beta1"
+description = "From a sound file, draw a spectrogram trough a GUI"
+authors = [
+    {name = "Bolol",email = "43433312+BololZ@users.noreply.github.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "librosa (>=0.10.2.post1,<0.11.0)",
+    "matplotlib (>=3.10.1,<4.0.0)",
+    "numpy (>=2.1.3,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
