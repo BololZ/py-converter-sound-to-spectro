@@ -6,3 +6,4 @@ dist
 fichier/*
 image/*
 *.spec
+file_version_info.txt
