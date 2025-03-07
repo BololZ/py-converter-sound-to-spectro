@@ -5,7 +5,7 @@ description = "From a sound file, draw a spectrogram trough a GUI"
 authors = [
     {name = "Bolol", email = "43433312+BololZ@users.noreply.github.com"}
 ]
-license = "LICENSE"
+license = "MIT"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
