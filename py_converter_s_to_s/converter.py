@@ -45,7 +45,7 @@ def load_audio_file():
     if file_path:
         global CURRENT_FILE_PATH
         CURRENT_FILE_PATH = file_path
-        file_name_label.config(text=f"Fichier chargé: {file_path.split('/')[-1]}")
+        file_name_label.config(text=f"Fichier chargé : {file_path.split('/')[-1]}")
         update_spectrogram(cmap='viridis')
 
 def update_spectrogram(cmap='viridis'):
