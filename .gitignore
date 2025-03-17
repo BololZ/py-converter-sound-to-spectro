@@ -7,3 +7,8 @@ fichier/*
 image/*
 *.spec
 file_version_info.txt
+*.pyd
+*.exe
+*.dll
+*.pyc
+converter.*/*
