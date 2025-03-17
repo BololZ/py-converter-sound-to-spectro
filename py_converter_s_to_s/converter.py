@@ -89,8 +89,8 @@ class MainWindow(QMainWindow):
     def init_ui(self):
         """Initialise l'interface utilisateur."""
         # Create the main widget and layout
-        self.main_widget = QWidget()
-        self.layout = QVBoxLayout()
+        main_widget = QWidget()
+        layout = QVBoxLayout()
 
         # Create the file name label
         # layout.addWidget(file_name_label)
@@ -101,36 +101,36 @@ class MainWindow(QMainWindow):
         # Afficher le spectrogramme dans le CANVAS
         self.fig, _ = plt.subplots()
         self.canvas = FigureCanvas(self.fig)
-        self.layout.addWidget(self.canvas)
+        layout.addWidget(self.canvas)
 
-        self.main_widget.setLayout(self.layout)
-        self.setCentralWidget(self.main_widget)
+        main_widget.setLayout(layout)
+        self.setCentralWidget(main_widget)
 
         # Create the menu bar
-        self.menu_bar = self.menuBar()
+        menu_bar = self.menuBar()
 
-        self.file_menu = self.menu_bar.addMenu("Fichier")
+        file_menu = menu_bar.addMenu("Fichier")
         load_action = QAction("Charger un fichier audio", self)
         load_action.triggered.connect(self.load_audio_file)
-        self.file_menu.addAction(load_action)
+        file_menu.addAction(load_action)
 
         save_action = QAction("Enregistrer le spectrogramme", self)
         save_action.triggered.connect(self.save_spectrogram)
-        self.file_menu.addAction(save_action)
+        file_menu.addAction(save_action)
 
-        self.file_menu.addSeparator()
+        file_menu.addSeparator()
 
         quit_action = QAction("Quitter", self)
         quit_action.triggered.connect(self.on_closing)
-        self.file_menu.addAction(quit_action)
+        file_menu.addAction(quit_action)
 
-        self.colormap_menu = self.menu_bar.addMenu("Colormap")
+        colormap_menu = menu_bar.addMenu("Colormap")
         for colormap in plt.colormaps():
             colormap_action = QAction(colormap, self)
             colormap_action.triggered.connect(lambda checked, self=self,
                                               cmap=colormap: setattr(self, 'cmap', cmap))
             colormap_action.triggered.connect(self.update_spectrogram)
-            self.colormap_menu.addAction(colormap_action)
+            colormap_menu.addAction(colormap_action)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
