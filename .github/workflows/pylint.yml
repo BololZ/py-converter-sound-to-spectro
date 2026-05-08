@@ -16,22 +16,19 @@ permissions:
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.12"]
+    runs-on: [ "self-hosted" ]
     steps:
-    - uses: actions/checkout@v4
-    - name: Install poetry 
-      run: pipx install poetry 
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v5
+    - uses: actions/checkout@v6
       with:
-        python-version: ${{ matrix.python-version }}
+          ref: ${{ github.ref }}
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
         cache: 'poetry'
+        cache-dependency-path: 'pyproject.toml'
     - name: Install dependencies
       run: |
         poetry install --no-root --with dev
     - name: Analysing the code with pylint
       run: |
-        poetry run pylint --exit-zero $(git ls-files '*.py')
+        poetry run pylint $(git ls-files '*.py') -v
