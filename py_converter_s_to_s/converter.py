@@ -4,7 +4,7 @@ It includes functions for loading audio files, displaying waveforms, and saving 
 """
 
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QWidget, QLabel
+from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QWidget, QLabel, QStatusBar
 from PyQt6.QtGui import QAction
 import librosa
 import librosa.display
@@ -18,10 +18,12 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.current_file_path = None
-        self.file_name_label = QLabel("Aucun fichier chargé")
         self.canvas = None
         self.fig = None
         self.cmap = plt.get_cmap('viridis')
+        self.status_bar = QStatusBar()
+        self.setStatusBar(self.status_bar)
+        self.status_bar.showMessage("Aucun fichier chargé")
 
         # Set window title and size
         self.setWindowTitle("Spectrogramme Audio")
@@ -64,8 +66,8 @@ class MainWindow(QMainWindow):
         self.current_file_path, _ = QFileDialog.getOpenFileName(None, "Open Audio File", "",
                                                 "Audio Files (*.wav *.mp3 *.flac)")
         if self.current_file_path:
-            self.file_name_label.setText(f"Fichier chargé : "
-                                         f"{self.current_file_path.split('/')[-1]}")
+            y, sr = librosa.load(self.current_file_path)
+            self.update_status_bar(self.current_file_path, y, sr)
             self.update_spectrogram()
 
     def update_spectrogram(self):
@@ -81,6 +83,14 @@ class MainWindow(QMainWindow):
                                                     "PNG files (*.png)")
         if file_path:
             self.canvas.figure.savefig(file_path)
+
+    def update_status_bar(self, file_path, y, sr):
+        duration = len(y) / sr
+        filename = file_path.split('/')[-1]
+        self.status_bar.showMessage(
+            f"Fichier: {filename} | Durée: {duration:.2f}s | "
+            f"Fréquence: {sr:,} Hz | Échantillons: {len(y):,}"
+        )
 
     def on_closing(self):
         """Fonction appelée lorsque la fenêtre est fermée."""
