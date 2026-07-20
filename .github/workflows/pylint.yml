@@ -6,10 +6,12 @@ on:
     branches: [ main ]
     paths:
       - '**.py'
+      - 'pyproject.toml'
   pull_request:
     branches: [ main ]
     paths:
       - '**.py'
+      - 'pyproject.toml'
 
 permissions:
   contents: read # access to check out code and install dependencies
