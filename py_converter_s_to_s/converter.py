@@ -4,7 +4,8 @@ It includes functions for loading audio files, displaying waveforms, and saving 
 """
 
 import sys
-from PyQt6.QtWidgets import QApplication, QMainWindow, QFileDialog, QVBoxLayout, QWidget, QLabel, QStatusBar
+from PyQt6.QtWidgets import ( QApplication, QMainWindow, QFileDialog,
+    QVBoxLayout, QWidget, QLabel, QStatusBar )
 from PyQt6.QtGui import QAction
 import librosa
 import librosa.display
@@ -78,8 +79,8 @@ class MainWindow(QMainWindow):
             self.canvas.draw()
 
     def save_spectrogram(self):
-        """Enregistre le spectrogramme dans un fichier PNG."""
         file_path, _ = QFileDialog.getSaveFileName(None, "Save Spectrogram", "",
+        """Enregistre le spectrogramme dans un fichier PNG."""
                                                     "PNG files (*.png)")
         if file_path:
             self.canvas.figure.savefig(file_path)
