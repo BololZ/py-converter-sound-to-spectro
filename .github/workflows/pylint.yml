@@ -18,7 +18,11 @@ permissions:
 
 jobs:
   lint:
-    runs-on: [ "self-hosted" ]
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-slim]
+        python: [3.13, 3.14]
     steps:
     - uses: actions/checkout@v7
       with:
@@ -26,6 +30,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v7
       with:
+        python-version: ${{ matrix.python }}
         cache: 'poetry'
         cache-dependency-path: 'pyproject.toml'
     - name: Install dependencies
