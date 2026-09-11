@@ -11,7 +11,7 @@ requires-python = ">=3.13"
 dependencies = [
     "librosa (>=1.0.0,<1.1.0)",
     "matplotlib (>=3.11.1,<4.0.0)",
-    "numpy (>=2.5.2,<3.0.0)",
+    "numpy (>=2.5.3,<3.0.0)",
     "pyqt6 (>=6.11.0,<7.0.0)"
 ]
 
