@@ -33,6 +33,9 @@ jobs:
         python-version: ${{ matrix.python }}
         cache: 'poetry'
         cache-dependency-path: 'pyproject.toml'
+    - name: Install poetry
+      run: |
+        pipx install poetry
     - name: Install dependencies
       run: |
         poetry install --with dev
