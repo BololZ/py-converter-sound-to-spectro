@@ -90,6 +90,7 @@ class MainWindow(QMainWindow):
             self.canvas.draw()
 
     def save_spectrogram(self):
+        """Enregistre le spectrogramme dans un fichier PNG."""
         file_path, _ = QFileDialog.getSaveFileName(
             None,
             "Save Spectrogram",
@@ -101,6 +102,7 @@ class MainWindow(QMainWindow):
             self.canvas.figure.savefig(file_path)
 
     def update_status_bar(self, file_path, y, sr):
+        """Met à jour la barre de statut avec les informations du fichier chargé."""
         duration = len(y) / sr
         filename = file_path.split("/")[-1]
         self.status_bar.showMessage(
