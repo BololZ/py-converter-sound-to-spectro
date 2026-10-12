@@ -15,7 +15,7 @@
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may
 # run arbitrary code.
-extension-pkg-allow-list = ["PyQt6.QtGui", "PyQt6.QtWidgets"]
+extension-pkg-allow-list = [ "PyQt6.QtGui", "PyQt6.QtWidgets" ]
 
 # A comma-separated list of package or module names from where C extensions may
 # be loaded. Extensions are loading into the active Python interpreter and may
@@ -100,14 +100,14 @@ persistent = true
 
 [tool.pylint.basic]
 # Naming style matching correct argument names.
-argument-naming-style = snake_case
+argument-naming-style = "snake_case"
 
 # Regular expression matching correct argument names. Overrides argument-naming-
 # style. If left empty, argument names will be checked with the set naming style.
 # argument-rgx =
 
 # Naming style matching correct attribute names.
-attr-naming-style = snake_case
+attr-naming-style = "snake_case"
 
 # Regular expression matching correct attribute names. Overrides attr-naming-
 # style. If left empty, attribute names will be checked with the set naming
@@ -122,7 +122,7 @@ bad-names = ["foo", "bar", "baz", "toto", "tutu", "tata"]
 # bad-names-rgxs =
 
 # Naming style matching correct class attribute names.
-class-attribute-naming-style = PascalCase
+class-attribute-naming-style = "PascalCase"
 
 # Regular expression matching correct class attribute names. Overrides class-
 # attribute-naming-style. If left empty, class attribute names will be checked
@@ -130,7 +130,7 @@ class-attribute-naming-style = PascalCase
 # class-attribute-rgx =
 
 # Naming style matching correct class constant names.
-class-const-naming-style = UPPER_CASE
+class-const-naming-style = "UPPER_CASE"
 
 # Regular expression matching correct class constant names. Overrides class-
 # const-naming-style. If left empty, class constant names will be checked with
@@ -138,14 +138,14 @@ class-const-naming-style = UPPER_CASE
 # class-const-rgx =
 
 # Naming style matching correct class names.
-class-naming-style = PascalCase
+class-naming-style = "PascalCase"
 
 # Regular expression matching correct class names. Overrides class-naming-style.
 # If left empty, class names will be checked with the set naming style.
 # class-rgx =
 
 # Naming style matching correct constant names.
-const-naming-style = UPPER_CASE
+const-naming-style = "UPPER_CASE"
 
 # Regular expression matching correct constant names. Overrides const-naming-
 # style. If left empty, constant names will be checked with the set naming style.
@@ -156,7 +156,7 @@ const-naming-style = UPPER_CASE
 docstring-min-length = -1
 
 # Naming style matching correct function names.
-function-naming-style = snake_case
+function-naming-style = "snake_case"
 
 # Regular expression matching correct function names. Overrides function-naming-
 # style. If left empty, function names will be checked with the set naming style.
@@ -173,7 +173,7 @@ good-names = ["i", "j", "k", "ex", "Run", "_"]
 # include-naming-hint =
 
 # Naming style matching correct inline iteration names.
-inlinevar-naming-style = any
+inlinevar-naming-style = "any"
 
 # Regular expression matching correct inline iteration names. Overrides
 # inlinevar-naming-style. If left empty, inline iteration names will be checked
@@ -181,14 +181,14 @@ inlinevar-naming-style = any
 # inlinevar-rgx =
 
 # Naming style matching correct method names.
-method-naming-style = snake_case
+method-naming-style = "snake_case"
 
 # Regular expression matching correct method names. Overrides method-naming-
 # style. If left empty, method names will be checked with the set naming style.
 # method-rgx =
 
 # Naming style matching correct module names.
-module-naming-style = snake_case
+module-naming-style = "snake_case"
 
 # Regular expression matching correct module names. Overrides module-naming-
 # style. If left empty, module names will be checked with the set naming style.
@@ -216,7 +216,7 @@ property-classes = ["abc.abstractproperty"]
 # typevar-rgx =
 
 # Naming style matching correct variable names.
-variable-naming-style = snake_case
+variable-naming-style = "snake_case"
 
 # Regular expression matching correct variable names. Overrides variable-naming-
 # style. If left empty, variable names will be checked with the set naming style.
@@ -349,7 +349,7 @@ known-third-party = ["enchant"]
 [tool.pylint.logging]
 # The type of string formatting that logging methods do. `old` means using %
 # formatting, `new` is for `{}` formatting.
-logging-format-style = new
+logging-format-style = "new"
 
 # Logging modules to check that the string format arguments are in logging
 # function parameter format.

@@ -4,24 +4,32 @@ It includes functions for loading audio files, displaying waveforms, and saving 
 """
 
 import sys
-from PyQt6.QtWidgets import ( QApplication, QMainWindow, QFileDialog,
-    QVBoxLayout, QWidget, QLabel, QStatusBar )
-from PyQt6.QtGui import QAction
+
 import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from PyQt6.QtGui import QAction
+from PyQt6.QtWidgets import (
+    QApplication,
+    QFileDialog,
+    QMainWindow,
+    QStatusBar,
+    QVBoxLayout,
+    QWidget,
+)
 
 
 class MainWindow(QMainWindow):
     """Classe principale pour la fenêtre de l'application."""
+
     def __init__(self):
         super().__init__()
         self.current_file_path = None
         self.canvas = None
         self.fig = None
-        self.cmap = plt.get_cmap('viridis')
+        self.cmap = plt.get_cmap("viridis")
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Aucun fichier chargé")
@@ -52,10 +60,12 @@ class MainWindow(QMainWindow):
             canvas_width, canvas_height = self.canvas.get_width_height()
 
             # Afficher le spectrogramme
-            plt.figure(figsize=(canvas_height/100, canvas_width/100))
-            librosa.display.specshow(d, sr=sr, x_axis='time', y_axis='log', cmap=self.cmap)
-            plt.colorbar(format='%+2.0f dB')
-            plt.title('Spectrogramme')
+            plt.figure(figsize=(canvas_height / 100, canvas_width / 100))
+            librosa.display.specshow(
+                d, sr=sr, x_axis="time", y_axis="log", cmap=self.cmap
+            )
+            plt.colorbar(format="%+2.0f dB")
+            plt.title("Spectrogramme")
             plt.tight_layout()
 
             return plt.gcf()
@@ -64,8 +74,9 @@ class MainWindow(QMainWindow):
 
     def load_audio_file(self):
         """Charge un fichier audio et met à jour le spectrogramme."""
-        self.current_file_path, _ = QFileDialog.getOpenFileName(None, "Open Audio File", "",
-                                                "Audio Files (*.wav *.mp3 *.flac)")
+        self.current_file_path, _ = QFileDialog.getOpenFileName(
+            None, "Open Audio File", "", "Audio Files (*.wav *.mp3 *.flac)"
+        )
         if self.current_file_path:
             y, sr = librosa.load(self.current_file_path)
             self.update_status_bar(self.current_file_path, y, sr)
@@ -79,15 +90,21 @@ class MainWindow(QMainWindow):
             self.canvas.draw()
 
     def save_spectrogram(self):
-        file_path, _ = QFileDialog.getSaveFileName(None, "Save Spectrogram", "",
         """Enregistre le spectrogramme dans un fichier PNG."""
-                                                    "PNG files (*.png)")
+        file_path, _ = QFileDialog.getSaveFileName(
+            None,
+            "Save Spectrogram",
+            "",
+            """Enregistre le spectrogramme dans un fichier PNG."""
+            "PNG files (*.png)",
+        )
         if file_path:
             self.canvas.figure.savefig(file_path)
 
     def update_status_bar(self, file_path, y, sr):
+        """Met à jour la barre de statut avec les informations du fichier chargé."""
         duration = len(y) / sr
-        filename = file_path.split('/')[-1]
+        filename = file_path.split("/")[-1]
         self.status_bar.showMessage(
             f"Fichier: {filename} | Durée: {duration:.2f}s | "
             f"Fréquence: {sr:,} Hz | Échantillons: {len(y):,}"
@@ -138,10 +155,12 @@ class MainWindow(QMainWindow):
         colormap_menu = menu_bar.addMenu("Colormap")
         for colormap in plt.colormaps():
             colormap_action = QAction(colormap, self)
-            colormap_action.triggered.connect(lambda checked, self=self,
-                                              cmap=colormap: setattr(self, 'cmap', cmap))
+            colormap_action.triggered.connect(
+                lambda checked, self=self, cmap=colormap: setattr(self, "cmap", cmap)
+            )
             colormap_action.triggered.connect(self.update_spectrogram)
             colormap_menu.addAction(colormap_action)
+
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
