@@ -36,6 +36,12 @@ jobs:
         python-version: ${{ matrix.python }}
         cache: 'poetry'
         cache-dependency-path: 'pyproject.toml'
+    - name: Install Qt system libraries
+      # ubuntu-slim lacks the shared libraries PyQt6 extensions link against;
+      # without them pylint cannot import PyQt6.QtGui/QtWidgets (E0401/E0611)
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends libgl1 libegl1 libxkbcommon0 libxcb1 libdbus-1-3
     - name: Install dependencies
       run: |
         poetry install --with dev
