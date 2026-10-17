@@ -9,7 +9,7 @@ import librosa
 import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from PyQt6.QtGui import QAction
 from PyQt6.QtWidgets import (
     QApplication,
